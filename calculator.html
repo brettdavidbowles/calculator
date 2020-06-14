@@ -8,21 +8,21 @@
         
 <div id = 'calcButt'>
 </div>
-        <button type = 'button' id = 'numOrOp'>1</button>
-        <button type = 'button' id = 'numOrOp'>2</button>
-        <button type = 'button' id = 'numOrOp'>3</button>
-        <button type = 'button' id = 'numOrOp'>+</button><br>
-        <button type = 'button' id = 'numOrOp'>4</button>
-        <button type = 'button' id = 'numOrOp'>5</button>
-        <button type = 'button' id = 'numOrOp'>6</button>
-        <button type = 'button' id = 'numOrOp'>-</button><br>
-        <button type = 'button' id = 'numOrOp'>7</button>
-        <button type = 'button' id = 'numOrOp'>8</button>
-        <button type = 'button' id = 'numOrOp'>9</button>
-        <button type = 'button' id = 'numOrOp'>x</button><br>
-        <button type = 'button' id = 'numOrOp'>0</button>
+        <button type = 'button' id = 'num'>1</button>
+        <button type = 'button' id = 'num'>2</button>
+        <button type = 'button' id = 'num'>3</button>
+        <button type = 'button' id = 'Op'>+</button><br>
+        <button type = 'button' id = 'num'>4</button>
+        <button type = 'button' id = 'num'>5</button>
+        <button type = 'button' id = 'num'>6</button>
+        <button type = 'button' id = 'Op'>-</button><br>
+        <button type = 'button' id = 'num'>7</button>
+        <button type = 'button' id = 'num'>8</button>
+        <button type = 'button' id = 'num'>9</button>
+        <button type = 'button' id = 'Op'>x</button><br>
+        <button type = 'button' id = 'num'>0</button>
         <button type = 'button' id = 'equals'>=</button>
-        <button type = 'button' id = 'numOrOp'>/</button>
+        <button type = 'button' id = 'Op'>/</button>
         <button type = 'button' id = 'clear'>CE</button><br>
         
 <div id = 'answer'>
@@ -33,34 +33,39 @@
            const display = document.querySelector('#display');
             
             let displayPar = document.createElement("p");
-            let displayValue = ""
             
+            const zero = document.createTextNode("0");
+
+            let displayValue = "";
+            let counter = 0;
             
 
-            const buttons = document.querySelectorAll('#numOrOp');
+            const buttons = document.querySelectorAll('#num');
             const clearButt = document.querySelector('#clear');
             
             for (const button of buttons) {
             button.addEventListener('click', (e) => {
                 addToDisplay(button.textContent)
-            }
-            )
+            })
             };
 
            function addToDisplay (text){
                 displayValue = text;
-                let testNode = document.createTextNode(displayValue);
-                displayPar.appendChild(testNode);
+                const textNode = document.createTextNode(displayValue);
+                displayPar.appendChild(textNode);
+                counter++
             }
 
             function clearDisplay () {
-                displayValue -= displayValue;
-                let testNode = document.createTextNode(displayValue);
-                displayPar.appendChild(testNode);
+                for (let i = 0; i < counter; i++){
+                    displayPar.removeChild(displayPar.lastChild)
+                }  
             }
             
             clearButt.addEventListener('click', (e) => {
-                    clearDisplay()
+                displayValue -= displayValue
+                clearDisplay();
+                counter -= counter;
                 })
             
             
