@@ -11,18 +11,18 @@
         <button type = 'button' id = 'num'>1</button>
         <button type = 'button' id = 'num'>2</button>
         <button type = 'button' id = 'num'>3</button>
-        <button type = 'button' id = 'Op'>+</button><br>
+        <button type = 'button' id = 'op'>+</button><br>
         <button type = 'button' id = 'num'>4</button>
         <button type = 'button' id = 'num'>5</button>
         <button type = 'button' id = 'num'>6</button>
-        <button type = 'button' id = 'Op'>-</button><br>
+        <button type = 'button' id = 'op'>-</button><br>
         <button type = 'button' id = 'num'>7</button>
         <button type = 'button' id = 'num'>8</button>
         <button type = 'button' id = 'num'>9</button>
-        <button type = 'button' id = 'Op'>x</button><br>
+        <button type = 'button' id = 'op'>x</button><br>
         <button type = 'button' id = 'num'>0</button>
         <button type = 'button' id = 'equals'>=</button>
-        <button type = 'button' id = 'Op'>/</button>
+        <button type = 'button' id = 'op'>/</button>
         <button type = 'button' id = 'clear'>CE</button><br>
         
 <div id = 'answer'>
@@ -37,11 +37,13 @@
             const zero = document.createTextNode("0");
 
             let displayValue = "";
+            fullValue = "";
             let counter = 0;
             
 
             const buttons = document.querySelectorAll('#num');
             const clearButt = document.querySelector('#clear');
+            const equalButt = document.querySelector('#equals');
             
             for (const button of buttons) {
             button.addEventListener('click', (e) => {
@@ -51,6 +53,7 @@
 
            function addToDisplay (text){
                 displayValue = text;
+                fullValue += text;
                 const textNode = document.createTextNode(displayValue);
                 displayPar.appendChild(textNode);
                 counter++
@@ -69,9 +72,35 @@
                 })
             
             
-            
             display.appendChild(displayPar);
+           
+            const ops = document.querySelectorAll('#op');
+            let currentOp
+            let valueArray = [];
+            let opsArray = [];
+
+            for (const op of ops) {
+                op.addEventListener('click', (e) => {
+                    currentOp = op.textContent;
+                    opsArray.push(currentOp);
+                    storeValues(fullValue);
+                    fullValue = "";
+                    clearDisplay();
+                    counter -= counter;
+                })
+            }
             
+            equalButt.addEventListener('click', (e) => {
+                storeValues(fullValue);
+                let solution = operate(`${opsArray[0]}`, Number(valueArray[0]), Number(valueArray[1]));
+                console.log(solution);
+            })
+            
+            
+            
+            function storeValues(x){
+                valueArray.push(x);
+            }
 
             function add(a, b){
                 return a + b
@@ -90,7 +119,7 @@
             }
             }
             
-            function operate(op){
+            function operate(op, a, b){
                 if (op == '+'){
                     return add(a, b)
                 } else if (op == '-'){
@@ -98,7 +127,7 @@
                 } else if (op == '*'){
                     return multiply(a, b)
                 } else if (op == '/'){
-                    return a / b
+                    return divide(a, b)
                 }
                 
             }
