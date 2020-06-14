@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        
+        <div id = 'display'>
+            
+        </div>
+        
+<div id = 'calcButt'>
+</div>
+        <button type = 'button' id = 'numOrOp'>1</button>
+        <button type = 'button' id = 'numOrOp'>2</button>
+        <button type = 'button' id = 'numOrOp'>3</button>
+        <button type = 'button' id = 'numOrOp'>+</button><br>
+        <button type = 'button' id = 'numOrOp'>4</button>
+        <button type = 'button' id = 'numOrOp'>5</button>
+        <button type = 'button' id = 'numOrOp'>6</button>
+        <button type = 'button' id = 'numOrOp'>-</button><br>
+        <button type = 'button' id = 'numOrOp'>7</button>
+        <button type = 'button' id = 'numOrOp'>8</button>
+        <button type = 'button' id = 'numOrOp'>9</button>
+        <button type = 'button' id = 'numOrOp'>x</button><br>
+        <button type = 'button' id = 'numOrOp'>0</button>
+        <button type = 'button' id = 'equals'>=</button>
+        <button type = 'button' id = 'numOrOp'>/</button>
+        <button type = 'button' id = 'clear'>CE</button><br>
+        
+<div id = 'answer'>
+
+</div>
+
+        <script>
+           const display = document.querySelector('#display');
+            
+            let displayPar = document.createElement("p");
+            let displayValue = ""
+            
+            
+
+            const buttons = document.querySelectorAll('#numOrOp');
+            const clearButt = document.querySelector('#clear');
+            
+            for (const button of buttons) {
+            button.addEventListener('click', (e) => {
+                addToDisplay(button.textContent)
+            }
+            )
+            };
+
+           function addToDisplay (text){
+                displayValue = text;
+                let testNode = document.createTextNode(displayValue);
+                displayPar.appendChild(testNode);
+            }
+
+            function clearDisplay () {
+                displayValue -= displayValue;
+                let testNode = document.createTextNode(displayValue);
+                displayPar.appendChild(testNode);
+            }
+            
+            clearButt.addEventListener('click', (e) => {
+                    clearDisplay()
+                })
+            
+            
+            
+            display.appendChild(displayPar);
+            
+
+            function add(a, b){
+                return a + b
+            };
+            function subtract(a, b){
+                return a - b
+            };
+            function multiply(a, b){
+                return a * b
+            }
+            function divide(a, b){
+                if (b == 0){
+                        return "Can't divide by zero"
+                    } else {
+                    return a / b
+            }
+            }
+            
+            function operate(op){
+                if (op == '+'){
+                    return add(a, b)
+                } else if (op == '-'){
+                    return subtract(a, b)
+                } else if (op == '*'){
+                    return multiply(a, b)
+                } else if (op == '/'){
+                    return a / b
+                }
+                
+            }
+            
+        </script>
+    </body>
+
+</html>
