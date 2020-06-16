@@ -19,7 +19,7 @@
         <button type = 'button' id = 'num'>7</button>
         <button type = 'button' id = 'num'>8</button>
         <button type = 'button' id = 'num'>9</button>
-        <button type = 'button' id = 'op'>x</button><br>
+        <button type = 'button' id = 'op'>*</button><br>
         <button type = 'button' id = 'num'>0</button>
         <button type = 'button' id = 'equals'>=</button>
         <button type = 'button' id = 'op'>/</button>
@@ -44,6 +44,8 @@
             const buttons = document.querySelectorAll('#num');
             const clearButt = document.querySelector('#clear');
             const equalButt = document.querySelector('#equals');
+            const answer = document.querySelector('#answer');
+            let answerPar = document.createElement("p");
             
             for (const button of buttons) {
             button.addEventListener('click', (e) => {
@@ -92,11 +94,39 @@
             
             equalButt.addEventListener('click', (e) => {
                 storeValues(fullValue);
-                let solution = operate(`${opsArray[0]}`, Number(valueArray[0]), Number(valueArray[1]));
+                let solution = multiOps(opsArray, valueArray);
+                const textNode = document.createTextNode(solution);
+                answerPar.appendChild(textNode);
+                answer.appendChild(answerPar);
                 console.log(solution);
             })
             
+            function multiOps (oArr, vArr) {
+                let runningTotal = Number(vArr[0]);
+                for (let i = 0; i < oArr.length; i++) {
+                    runningTotal = operate(`${oArr[i]}`, runningTotal, Number(vArr[i+1]))
+                }
+                return runningTotal
+            }
+
+
+         
+    function orderOfOps (oArr, vArr) {
+                let newVArr = [];
+                let newOArr = [];
+                for (let i = 0; i < oArr.length; i++){
+                    if ((oArr[i] == '*' || oArr[i] == '/') &&
+                       (oArr[i-1] != '*' && oArr[i-1] != '/')){
+                       newVArr.push(operate(`${oArr[i]}`, vArr[i], vArr[i+1]))
+                        
+                    } 
+                }
+  			console.log(newVArr)
+            }
+
+ 
             
+
             
             function storeValues(x){
                 valueArray.push(x);
