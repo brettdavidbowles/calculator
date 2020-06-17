@@ -111,18 +111,34 @@
 
 
          
-    function orderOfOps (oArr, vArr) {
+function orderOfOps (oArr, vArr) {
                 let newVArr = [];
                 let newOArr = [];
-                for (let i = 0; i < oArr.length; i++){
+  function oneRun(oArr, vArr) {
+                for (let i = 0; i <= oArr.length; i++){
                     if ((oArr[i] == '*' || oArr[i] == '/') &&
                        (oArr[i-1] != '*' && oArr[i-1] != '/')){
                        newVArr.push(operate(`${oArr[i]}`, vArr[i], vArr[i+1]))
-                        
+                       vArr.splice(i, 1);
+                      oArr.splice(i, 1);
                     } 
+                     else {
+                      newVArr.push(vArr[i])
+                    }
+                    
                 }
-  			console.log(newVArr)
+  			
+    
             }
+  function check (oArr) {
+   		for (let i = 0; i < oArr.length; i++) {
+          if (oArr[i] == '*' || oArr[i] == '/') {
+  }
+        }
+  }
+ oneRun(oArr, vArr)
+ 
+}
 
  
             
