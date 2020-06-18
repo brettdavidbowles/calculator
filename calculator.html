@@ -39,6 +39,7 @@
             let displayValue = "";
             fullValue = "";
             let counter = 0;
+            let runningTotal;
             
 
             const buttons = document.querySelectorAll('#num');
@@ -63,14 +64,26 @@
 
             function clearDisplay () {
                 for (let i = 0; i < counter; i++){
-                    displayPar.removeChild(displayPar.lastChild)
+                    displayPar.removeChild(displayPar.lastChild);
+                    fullValue -= fullValue;
+                    displayValue -= displayValue;
                 }  
+            }
+
+            function clearSol () {
+                for (let i = 0; i < counter; i++) {
+                    answerPar.removeChild(answerPar.lastChild)
+                }
             }
             
             clearButt.addEventListener('click', (e) => {
                 displayValue -= displayValue
                 clearDisplay();
+                clearSol();
                 counter -= counter;
+                valueArray = [];
+                opsArray = [];
+                runningTotal -= runningTotal;
                 })
             
             
@@ -78,31 +91,42 @@
            
             const ops = document.querySelectorAll('#op');
             let currentOp
-            let valueArray = [];
             let opsArray = [];
+            let valueArray = [];
+            let formerSol = 0;
+
+
 
             for (const op of ops) {
                 op.addEventListener('click', (e) => {
+                    
                     currentOp = op.textContent;
                     opsArray.push(currentOp);
-                    storeValues(fullValue);
-                    fullValue = "";
+                    
+                    valueArray.push(fullValue)
+                    
+                    fullValue -= fullValue;
                     clearDisplay();
                     counter -= counter;
                 })
             }
             
             equalButt.addEventListener('click', (e) => {
-                storeValues(fullValue);
-                let solution = multiOps(opsArray, valueArray);
-                const textNode = document.createTextNode(solution);
+                valueArray.push(fullValue);
+                orderOfOps(opsArray, valueArray);
+                multiOps(opsArray, valueArray);
+                const textNode = document.createTextNode(runningTotal);
                 answerPar.appendChild(textNode);
                 answer.appendChild(answerPar);
-                console.log(solution);
+                valueArray.splice(0, valueArray.length);
+                opsArray.splice(0, opsArray.length);
+                fullValue -= fullValue;
+                fullValue += runningTotal;
+                console.log(runningTotal);
             })
             
             function multiOps (oArr, vArr) {
-                let runningTotal = Number(vArr[0]);
+                runningTotal = Number(vArr[0]);
                 for (let i = 0; i < oArr.length; i++) {
                     runningTotal = operate(`${oArr[i]}`, runningTotal, Number(vArr[i+1]))
                 }
@@ -112,32 +136,25 @@
 
          
 function orderOfOps (oArr, vArr) {
-                let newVArr = [];
-                let newOArr = [];
   function oneRun(oArr, vArr) {
                 for (let i = 0; i <= oArr.length; i++){
                     if ((oArr[i] == '*' || oArr[i] == '/') &&
                        (oArr[i-1] != '*' && oArr[i-1] != '/')){
-                       newVArr.push(operate(`${oArr[i]}`, vArr[i], vArr[i+1]))
-                       vArr.splice(i, 1);
+                       vArr.splice(i, 2, (operate(`${oArr[i]}`, vArr[i], vArr[i+1])));
                       oArr.splice(i, 1);
+                      
                     } 
-                     else {
-                      newVArr.push(vArr[i])
-                    }
-                    
                 }
-  			
-    
-            }
-  function check (oArr) {
+  }
+  function check (oArr, vArr) {
    		for (let i = 0; i < oArr.length; i++) {
           if (oArr[i] == '*' || oArr[i] == '/') {
+            oneRun(oArr, vArr)
   }
         }
   }
- oneRun(oArr, vArr)
- 
+ oneRun(oArr, vArr);
+ check (oArr, vArr);
 }
 
  
