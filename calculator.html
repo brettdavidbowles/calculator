@@ -37,9 +37,9 @@
             const zero = document.createTextNode("0");
 
             let displayValue = "";
-            fullValue = "";
+            fullValue = 0;
             let counter = 0;
-            let runningTotal;
+            let runningTotal = 0;
             
 
             const buttons = document.querySelectorAll('#num');
@@ -47,12 +47,24 @@
             const equalButt = document.querySelector('#equals');
             const answer = document.querySelector('#answer');
             let answerPar = document.createElement("p");
+            let whatDidIJustPress = 2;
             
             for (const button of buttons) {
             button.addEventListener('click', (e) => {
-                addToDisplay(button.textContent)
+                if (whatDidIJustPress == 1) {
+                    clearDisplay();
+                    addToDisplay(button.textContent);
+                    
+                    whatDidIJustPress = 2;
+                } else if (whatDidIJustPress ==2) {
+                
+                addToDisplay(button.textContent);
+               
+                whatDidIJustPress = 2;
+                }
             })
             };
+            
 
            function addToDisplay (text){
                 displayValue = text;
@@ -62,18 +74,17 @@
                 counter++
             }
 
-            function clearDisplay () {
-                for (let i = 0; i < counter; i++){
-                    displayPar.removeChild(displayPar.lastChild);
-                    fullValue -= fullValue;
-                    displayValue -= displayValue;
+            function clearDisplay (butt) {
+                while(displayPar.firstChild){
+                    displayPar.removeChild(displayPar.firstChild)
                 }  
             }
 
             function clearSol () {
-                for (let i = 0; i < counter; i++) {
-                    answerPar.removeChild(answerPar.lastChild)
+                while(answerPar.firstChild) {
+                    answerPar.removeChild(answerPar.firstChild)
                 }
+               
             }
             
             clearButt.addEventListener('click', (e) => {
@@ -84,6 +95,8 @@
                 valueArray = [];
                 opsArray = [];
                 runningTotal -= runningTotal;
+                fullValue -= fullValue;
+                
                 })
             
             
@@ -99,30 +112,34 @@
 
             for (const op of ops) {
                 op.addEventListener('click', (e) => {
-                    
+                   
                     currentOp = op.textContent;
                     opsArray.push(currentOp);
                     
                     valueArray.push(fullValue)
                     
                     fullValue -= fullValue;
-                    clearDisplay();
-                    counter -= counter;
+                    
+                    whatDidIJustPress = 1;
+                    
+                    
                 })
             }
             
             equalButt.addEventListener('click', (e) => {
+                clearDisplay();
                 valueArray.push(fullValue);
                 orderOfOps(opsArray, valueArray);
                 multiOps(opsArray, valueArray);
                 const textNode = document.createTextNode(runningTotal);
-                answerPar.appendChild(textNode);
-                answer.appendChild(answerPar);
+                displayPar.appendChild(textNode);
+                
                 valueArray.splice(0, valueArray.length);
                 opsArray.splice(0, opsArray.length);
                 fullValue -= fullValue;
                 fullValue += runningTotal;
                 console.log(runningTotal);
+                
             })
             
             function multiOps (oArr, vArr) {
