@@ -48,7 +48,8 @@
             const answer = document.querySelector('#answer');
             let answerPar = document.createElement("p");
             let whatDidIJustPress = 2;
-            
+                //2 if it's a number, 1 if it's an operation
+
             for (const button of buttons) {
             button.addEventListener('click', (e) => {
                 if (whatDidIJustPress == 1) {
@@ -161,7 +162,9 @@ function orderOfOps (oArr, vArr) {
                       oArr.splice(i, 1);
                       
                     } 
+                   
                 }
+                check (oArr, vArr)
   }
   function check (oArr, vArr) {
    		for (let i = 0; i < oArr.length; i++) {
@@ -171,7 +174,7 @@ function orderOfOps (oArr, vArr) {
         }
   }
  oneRun(oArr, vArr);
- check (oArr, vArr);
+ 
 }
 
  
