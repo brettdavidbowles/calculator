@@ -21,6 +21,7 @@
         <button type = 'button' id = 'num'>9</button>
         <button type = 'button' id = 'op'>*</button><br>
         <button type = 'button' id = 'num'>0</button>
+        <button type = 'button' id = 'dec'>.</button>
         <button type = 'button' id = 'equals'>=</button>
         <button type = 'button' id = 'op'>/</button>
         <button type = 'button' id = 'clear'>CE</button><br>
@@ -37,18 +38,20 @@
             const zero = document.createTextNode("0");
 
             let displayValue = "";
-            fullValue = 0;
+            let fullValue = 0;
             let counter = 0;
             let runningTotal = 0;
             
 
             const buttons = document.querySelectorAll('#num');
+            const ops = document.querySelectorAll('#op');
             const clearButt = document.querySelector('#clear');
             const equalButt = document.querySelector('#equals');
+            const decButt = document.querySelector('#dec');
             const answer = document.querySelector('#answer');
             let answerPar = document.createElement("p");
             let whatDidIJustPress = 2;
-                //2 if it's a number, 1 if it's an operation
+                // 1 if it's an operation, 2 if it's a number, 3 if it's a decimal
 
             for (const button of buttons) {
             button.addEventListener('click', (e) => {
@@ -57,7 +60,7 @@
                     addToDisplay(button.textContent);
                     
                     whatDidIJustPress = 2;
-                } else if (whatDidIJustPress ==2) {
+                } else if (whatDidIJustPress == 2 || whatDidIJustPress == 3) {
                 
                 addToDisplay(button.textContent);
                
@@ -65,6 +68,61 @@
                 }
             })
             };
+
+            
+            decButt.addEventListener('click', (e) => {
+                let denied = 1;
+                //to deny, deny = 0. to not deny, deny = 1.
+                function check (str) {
+                    strArr = Array.from(str)
+   		    for (let i = 0; i < strArr.length; i++) {
+                 if (strArr[i] == '.') {
+                    alert('ERROR: Cannot have two decimals in one number.');
+                    clearDisplay();
+                    denied = 0
+                         }
+                        }
+                     }
+                     check(fullValue);
+                     if (denied == 0){
+                         fullValue -= fullValue;
+                         denied = 1
+                     } else {
+                    if (whatDidIJustPress == 1) {
+                        clearDisplay();
+                        addToDisplay(decButt.textContent);
+                        whatDidIJustPress = 3;
+                        denied = 1
+                    } else if (whatDidIJustPress == 2) {
+                        addToDisplay(decButt.textContent);
+                        whatDidIJustPress = 3;
+                        denied = 1
+                    } else if (whatDidIJustPress == 3) {
+                        alert('ERROR: Cannot have two decimals in one number.');
+                        whatDidIJustPress = 3;
+                        denied = 1
+                    }
+                     }
+                });
+            
+
+            for (const op of ops) {
+                op.addEventListener('click', (e) => {
+                  if (whatDidIJustPress == 1) {
+                      opsArray.pop()
+                  }; 
+                    currentOp = op.textContent;
+                    opsArray.push(currentOp);
+                    
+                    valueArray.push(fullValue)
+                    
+                    fullValue -= fullValue;
+                    
+                    whatDidIJustPress = 1;
+                    
+                    
+                })
+            }
             
 
            function addToDisplay (text){
@@ -103,7 +161,7 @@
             
             display.appendChild(displayPar);
            
-            const ops = document.querySelectorAll('#op');
+            
             let currentOp
             let opsArray = [];
             let valueArray = [];
@@ -111,21 +169,7 @@
 
 
 
-            for (const op of ops) {
-                op.addEventListener('click', (e) => {
-                   
-                    currentOp = op.textContent;
-                    opsArray.push(currentOp);
-                    
-                    valueArray.push(fullValue)
-                    
-                    fullValue -= fullValue;
-                    
-                    whatDidIJustPress = 1;
-                    
-                    
-                })
-            }
+
             
             equalButt.addEventListener('click', (e) => {
                 clearDisplay();
