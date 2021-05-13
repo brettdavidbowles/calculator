@@ -1,31 +1,78 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+    </head>
     <body>
-        
-        <div id = 'display'>
-            
+        <div class = 'displayWrapper'>
+        <div class = 'display' id = 'display'>
+            </div>
         </div>
         
-<div id = 'calcButt'>
-</div>
-        <button type = 'button' id = 'num'>1</button>
-        <button type = 'button' id = 'num'>2</button>
-        <button type = 'button' id = 'num'>3</button>
-        <button type = 'button' id = 'op'>+</button><br>
-        <button type = 'button' id = 'num'>4</button>
-        <button type = 'button' id = 'num'>5</button>
-        <button type = 'button' id = 'num'>6</button>
-        <button type = 'button' id = 'op'>-</button><br>
-        <button type = 'button' id = 'num'>7</button>
-        <button type = 'button' id = 'num'>8</button>
-        <button type = 'button' id = 'num'>9</button>
-        <button type = 'button' id = 'op'>*</button><br>
-        <button type = 'button' id = 'num'>0</button>
-        <button type = 'button' id = 'dec'>.</button>
-        <button type = 'button' id = 'equals'>=</button>
-        <button type = 'button' id = 'op'>/</button>
-        <button type = 'button' id = 'clear'>CE</button><br>
-        
+<div class = 'calcButt' id = 'calcButt'>
+    <div class = 'topButtonWrap'>
+        <button type = 'button' class = 'topButton' id = 'clear'>AC</button>
+    </div> 
+    <div class = 'topButtonWrap'>
+        <button type = 'button' class = 'topButton' id = 'plusMinus'>+/-</button>
+    </div>
+    <div class = 'topButtonWrap'>
+        <button type= 'button' class = 'topButton' id = 'percent'>%</button>
+        </div>  
+    <div class = 'opButtonWrap'>    
+        <button type = 'button' class = 'opButton' id = 'op' value = '/'>&#247</button>
+    </div>
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>7</button>
+    </div>
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>8</button>
+    </div>
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>9</button>
+    </div>
+    <div class = 'opButtonWrap'>
+        <button type = 'button' class = 'opButton' id = 'op' value = '*'>&#215</button>
+    </div>
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>4</button>
+    </div>
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>5</button>
+    </div>
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>6</button>
+    </div> 
+    <div class = 'opButtonWrap'>
+        <button type = 'button' class = 'opButton' id = 'op' value = '-'>-</button>
+    </div>  
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>1</button>
+    </div>  
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>2</button>
+    </div>
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num'>3</button>
+    </div>
+    <div class = 'opButtonWrap'>
+        <button type = 'button' class = 'opButton' id = 'op' value = '+'>+</button>
+    </div>
+    
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'num' >0</button>
+    </div>
+    <div class = 'numberButtonWrap'></div>
+    
+    <div class = 'numberButtonWrap'>
+        <button type = 'button' class = 'numberButton' id = 'dec'>.</button>
+    </div>
+    <div class = 'opButtonWrap'>
+        <button type = 'button' class = 'opButton' id = 'equals'>=</button>
+    </div>
+    <div class = 'zeroButton'></div>
+
+</div>      
 <div id = 'answer'>
 
 </div>
@@ -110,8 +157,10 @@
                 op.addEventListener('click', (e) => {
                   if (whatDidIJustPress == 1) {
                       opsArray.pop()
-                  }; 
-                    currentOp = op.textContent;
+                  }
+                    
+                    currentOp = op.value;
+                    
                     opsArray.push(currentOp);
                     
                     valueArray.push(fullValue)
@@ -119,7 +168,7 @@
                     fullValue -= fullValue;
                     
                     whatDidIJustPress = 1;
-                    
+                    console.log(opsArray)
                     
                 })
             }

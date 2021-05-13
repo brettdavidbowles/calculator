@@ -1,0 +1,115 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+
+.displayWrapper {
+    position: relative;
+    height: 300px
+}
+.display {
+    height: 150px;
+    font-size: 500%;
+    color: white;
+    text-align: right;
+    width: 400px;
+    position: absolute;
+    bottom: 0%;
+    z-index: 3
+}
+
+.calcButt {
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+  height: 500px;
+  justify-content: space-between;
+  padding: 25px;
+  position: relative
+
+}
+
+
+.numberButton {
+background-color: transparent;
+border-color: transparent;
+    font-size: 200%;
+    box-align: center;
+  color: white;
+  width: 100%;
+  border-radius: 50%
+   
+}
+
+.opButton {
+    color: white;
+    background-color: transparent;
+    border-radius: 50%;
+    border-color: transparent;
+    border-style: solid;
+    font-size: 200%;
+    width: 100%
+}
+
+.topButton {
+    color: black;
+    background-color: transparent;
+    border-radius: 50%;
+    border-color: transparent;
+    border-style: solid;
+    font-size: 200%;
+    width: 100%
+}
+
+
+/* pretty sure these button wrappers are completely not needed now.... change at some point */
+
+.numberButtonWrap {
+    width: 21%;
+    height: 17%;
+    margin: 0.5%;
+    display: flex;
+    background-color: #505050;
+  justify-content: center;
+    border-radius: 50%;
+  border-color: transparent;
+  z-index: 2
+   
+}
+
+.opButtonWrap {
+    width: 21%;
+    height: 17%;
+    margin: 0.5%;
+    display: flex;
+    background-color: #FF9500;
+  justify-content: center;
+    border-radius: 50%;
+  border-color: transparent;
+   
+}
+
+.topButtonWrap {
+    width: 21%;
+    height: 17%;
+    margin: 0.5%;
+    display: flex;
+    background-color: #D4D4D2;
+  justify-content: center;
+    border-radius: 50%;
+  border-color: transparent;
+   
+}
+
+.zeroButton {
+    position: absolute;
+    width: 23.5%;
+    height: 15.5%;
+    background-color: #505050;
+    bottom: 6.9%;
+    left: 15%;
+    z-index: 0
+
+}
+
+
