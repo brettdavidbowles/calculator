@@ -97,12 +97,20 @@
             const decButt = document.querySelector('#dec');
             const answer = document.querySelector('#answer');
             const plusMinus = document.querySelector('#plusMinus');
+            const percent = document.querySelector('#percent')
             let answerPar = document.createElement("p");
             let whatDidIJustPress = 2;
-                // 1 if it's an operation, 2 if it's a number, 3 if it's a decimal
+                // 1 if it's an operation, 2 if it's a number, 3 if it's a decimal, 4 if it's plusMinus
 
             for (const button of buttons) {
                 button.addEventListener('click', (e) => {
+                function newOpAfterEqualButton (){
+                    if (valueArray.length == 0){
+                    clearDisplay()
+                    fullValue = 0
+                }
+                }
+                newOpAfterEqualButton()
                 if (whatDidIJustPress == 1) {
                     clearDisplay();
                     addToDisplay(button.textContent);
@@ -117,7 +125,6 @@
             })
             };
 
-            
             decButt.addEventListener('click', (e) => {
                 let denied = 1;
                 //to deny, deny = 0. to not deny, deny = 1.
@@ -219,6 +226,19 @@
 
 
 
+            plusMinus.addEventListener('click', (e) => {
+                clearDisplay()
+                fullValue *= -1
+                const textNode = document.createTextNode(fullValue)
+                displayPar.appendChild(textNode)
+            })
+
+            percent.addEventListener('click', (e) => {
+                clearDisplay()
+                fullValue /= 100
+                const textNode = document.createTextNode(fullValue)
+                displayPar.appendChild(textNode)
+            })
 
             
             equalButt.addEventListener('click', (e) => {
