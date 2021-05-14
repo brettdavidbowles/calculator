@@ -105,7 +105,7 @@
             for (const button of buttons) {
                 button.addEventListener('click', (e) => {
                 function newOpAfterEqualButton (){
-                    if (valueArray.length == 0){
+                    if (valueArray.length == 0 && whatDidIJustPress != 2){
                     clearDisplay()
                     fullValue = 0
                 }
