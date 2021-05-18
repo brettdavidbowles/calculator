@@ -2,10 +2,22 @@
     font-family: Arial, Helvetica, sans-serif;
     background-color: black;
 }
-
+@media only screen and (max-width: 768px) {
+    .calcWrapper{
+        width: 100vw;
+        bottom: 0%;
+    }
+}
+.calcWrapper{
+    width: 450px;
+    height: 650px;
+    position: relative;
+    bottom: 0%
+}
 .displayWrapper {
     position: relative;
-    height: 100px
+    height: 100px;
+    right: 0%
 }
 .display {
     height: 150px;
@@ -14,18 +26,21 @@
     text-align: right;
     width: 400px;
     position: absolute;
-    bottom: 0%;
+    bottom: -100%;
+    right: 0%;
     z-index: 3
 }
 
-.calcButt {
-    width: 400px;
+.calcButtons {
+    
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    height: 500px;
+    height: 100%;
     justify-content: space-between;
-    padding: 25px;
-    position: relative
+    padding: 6.25%;
+    position: relative;
+    bottom: -40%
 
 }
 
@@ -34,7 +49,7 @@
     background-color: transparent;
     border-color: transparent;
     font-size: 200%;
-    box-align: center;
+    /* box-align: center; */
     color: white;
     width: 100%;
     border-radius: 50%
@@ -66,7 +81,7 @@
 
 .numberButtonWrap {
     width: 21%;
-    height: 17%;
+    height: 15%;
     margin: 0.5%;
     display: flex;
     background-color: #505050;
@@ -79,7 +94,7 @@
 
 .opButtonWrap {
     width: 21%;
-    height: 17%;
+    height: 15%;
     margin: 0.5%;
     display: flex;
     background-color: #FF9500;
@@ -91,7 +106,7 @@
 
 .topButtonWrap {
     width: 21%;
-    height: 17%;
+    height: 15%;
     margin: 0.5%;
     display: flex;
     background-color: #D4D4D2;
@@ -104,9 +119,9 @@
 .zeroButton {
     position: absolute;
     width: 23.5%;
-    height: 15.5%;
+    height: 13.9%;
     background-color: #505050;
-    bottom: 6.9%;
+    bottom: 8.25%;
     left: 15%;
     z-index: 0
 
